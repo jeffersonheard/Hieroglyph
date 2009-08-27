@@ -1,0 +1,1296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Graphics.Rendering.Hieroglyph.Visual</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>Hieroglyph-2.23: Purely functional 2D drawing</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Graphics.Rendering.Hieroglyph.Visual</FONT
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Here I describe and define the class Visual and some example instances
+   for the basic data structures in the GHC standard library, including
+   Data.Map, Data.IntMap, Data.Set, and Lists.  This gives a rich library
+   of data structures that are Visual as a direct transformation from
+   forall a, Visual b : a -&gt; Visual b
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ABaseVisual"
+>BaseVisual</A
+> = [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3AVisual"
+>Visual</A
+> t  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aprimitives"
+>primitives</A
+> :: t -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aoccludes"
+>occludes</A
+> :: (<A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t, <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> u) =&gt; t -&gt; u -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Abeside"
+>beside</A
+> :: (<A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t, <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> u) =&gt; t -&gt; u -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A%23%2B%23"
+>(#+#)</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A%23%2F%23"
+>(#/#)</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A%23%5C%23"
+>(#\#)</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Afillrule"
+>fillrule</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Afillcolour"
+>fillcolour</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adash"
+>dash</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> ([<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>], <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>) -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Astrokecolour"
+>strokecolour</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Alinecap"
+>linecap</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Amiterlimit"
+>miterlimit</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Atolerance"
+>tolerance</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ascalex"
+>scalex</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ascaley"
+>scaley</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ascale"
+>scale</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asettranslatex"
+>settranslatex</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asettranslatey"
+>settranslatey</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Atranslate"
+>translate</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Arotation"
+>rotation</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Afilled"
+>filled</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aoutlined"
+>outlined</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aclipped"
+>clipped</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aname"
+>name</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Acached"
+>cached</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Afresh"
+>fresh</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Alinewidth"
+>linewidth</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t%3ABaseVisual"
+></A
+><B
+>BaseVisual</B
+> = [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t%3AVisual"
+></A
+><B
+>Visual</B
+> t  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A Visual is an unstructured collection of primitives.  Conceptually, the
+   only requirement of a Visual is that it is Enumerable (or Foldable) in
+   terms of Primitives.  I initially wanted to implement this in terms of
+   the Foldable typeclass from Data.Foldable, but very few things provide
+   instances of Foldable that are conceptually so.  A list is Foldable,
+   and I have certain guarantees of efficiency by operating on lists, so
+   this is the instance of Foldable that I choose to have people implement.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aprimitives"
+></A
+><B
+>primitives</B
+> :: t -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Visual')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Visual" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> ([] a)</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> b =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> (<A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-IntMap.html#t%3AIntMap"
+>IntMap</A
+> b)</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> (<A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-Set.html#t%3ASet"
+>Set</A
+> t)</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> b =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> (<A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-Map.html#t%3AMap"
+>Map</A
+> a b)</TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aoccludes"
+></A
+><B
+>occludes</B
+> :: (<A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t, <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> u) =&gt; t -&gt; u -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Declare that a Visual possibly occludes another Visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Abeside"
+></A
+><B
+>beside</B
+> :: (<A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t, <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> u) =&gt; t -&gt; u -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Declare that a Visual doesn't occlude another Visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3A%23%2B%23"
+></A
+><B
+>(#+#)</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The beside operator.  Same as <TT
+>beside</TT
+>
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3A%23%2F%23"
+></A
+><B
+>(#/#)</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The occludes operator.  The left occludes the right.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3A%23%5C%23"
+></A
+><B
+>(#\#)</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The under operator.  The right occludes the left.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Afillrule"
+></A
+><B
+>fillrule</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the fill rule for this visual (Cairo)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Afillcolour"
+></A
+><B
+>fillcolour</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the fill colour
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Adash"
+></A
+><B
+>dash</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> ([<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>], <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>) -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the stipple pattern for lines (Cairo)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Astrokecolour"
+></A
+><B
+>strokecolour</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the stroke colour
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Alinecap"
+></A
+><B
+>linecap</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the line cap shape (Cairo)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Amiterlimit"
+></A
+><B
+>miterlimit</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the miter limit (Cairo)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Atolerance"
+></A
+><B
+>tolerance</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the polygon tolerance (Cairo)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Ascalex"
+></A
+><B
+>scalex</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the scale of the Visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Ascaley"
+></A
+><B
+>scaley</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the scale of the Visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Ascale"
+></A
+><B
+>scale</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Adjust the scale of the visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Asettranslatex"
+></A
+><B
+>settranslatex</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the translation of the visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Asettranslatey"
+></A
+><B
+>settranslatey</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the translation of the visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Atranslate"
+></A
+><B
+>translate</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Adjust the translation of the visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Arotation"
+></A
+><B
+>rotation</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the rotation of the visual
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Afilled"
+></A
+><B
+>filled</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set whether or not objects in the visual are filled
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aoutlined"
+></A
+><B
+>outlined</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set whether or not objects in the visual are outlined
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aclipped"
+></A
+><B
+>clipped</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set whether or not the objects in the visual are part of the clipping plane (Cairo)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aname"
+></A
+><B
+>name</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set the name of the objects for selection purposes
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Acached"
+></A
+><B
+>cached</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set whether the objects have already been cached.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Afresh"
+></A
+><B
+>fresh</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Set whether the objects have been updated.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Alinewidth"
+></A
+><B
+>linewidth</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> a =&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; a -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.3.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

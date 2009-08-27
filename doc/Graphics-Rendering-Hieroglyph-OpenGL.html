@@ -1,0 +1,1456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Graphics.Rendering.Hieroglyph.OpenGL</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>Hieroglyph-2.23: Purely functional 2D drawing</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Graphics.Rendering.Hieroglyph.OpenGL</FONT
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AHgGL"
+>HgGL</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Afreetextures"
+>freetextures</A
+> :: [TextureObject]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Afreebuffers"
+>freebuffers</A
+> :: [BufferObject]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Acompiledgeometry"
+>compiledgeometry</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-Map.html#t%3AMap"
+>Map</A
+> GLuint <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3ACompiledData"
+>CompiledData</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Anamemap"
+>namemap</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-Map.html#t%3AMap"
+>Map</A
+> GLuint <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Adrawarea"
+>drawarea</A
+> :: GLDrawingArea</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Awindow"
+>window</A
+> :: Window</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Acontext"
+>context</A
+> :: PangoContext</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aimagecache"
+>imagecache</A
+> :: <A HREF="Graphics-UI-Hieroglyph-Cache.html#t%3ACache"
+>Cache</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> ([<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>], TextureObject)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AGeometry"
+>Geometry</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ACompiledData"
+>CompiledData</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ACompiledDots"
+>CompiledDots</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avertices"
+>vertices</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACompiledArc"
+>CompiledArc</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avertices"
+>vertices</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACompiledPath"
+>CompiledPath</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avertices"
+>vertices</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACompiledRectangle"
+>CompiledRectangle</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avertices"
+>vertices</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACompiledText"
+>CompiledText</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avertices"
+>vertices</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atexture"
+>texture</A
+> :: TextureObject</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atexcoords"
+>texcoords</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACompiledImage"
+>CompiledImage</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avertices"
+>vertices</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Achannels"
+>channels</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aww"
+>ww</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Ahh"
+>hh</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atexture"
+>texture</A
+> :: TextureObject</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atexcoords"
+>texcoords</A
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOptimized"
+>Optimized</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattributes"
+>attributes</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Avbo"
+>vbo</A
+> :: BufferObject</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atbo"
+>tbo</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> BufferObject</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atobj"
+>tobj</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> TextureObject</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Auid"
+>uid</A
+> :: GLuint</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Astartindex"
+>startindex</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Alen"
+>len</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcolourToTuple"
+>colourToTuple</A
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; (<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcolourToGL"
+>colourToGL</A
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; Color4 <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinitializeBus"
+>initializeBus</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AWidget"
+>Widget</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AselectionBehaviour"
+>selectionBehaviour</A
+> :: <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3ABehaviour"
+>Behaviour</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderOnExpose"
+>renderOnExpose</A
+> :: <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AWidget"
+>Widget</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderObj"
+>renderObj</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmouseSelectionBehaviour"
+>mouseSelectionBehaviour</A
+> :: <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3ABehaviour"
+>Behaviour</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3AHieroglyphGLRuntime"
+></A
+><B
+>HieroglyphGLRuntime</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AHgGL"
+></A
+><B
+>HgGL</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Afreetextures"
+></A
+><B
+>freetextures</B
+> :: [TextureObject]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Afreebuffers"
+></A
+><B
+>freebuffers</B
+> :: [BufferObject]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Acompiledgeometry"
+></A
+><B
+>compiledgeometry</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-Map.html#t%3AMap"
+>Map</A
+> GLuint <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3ACompiledData"
+>CompiledData</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Anamemap"
+></A
+><B
+>namemap</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/containers/Data-Map.html#t%3AMap"
+>Map</A
+> GLuint <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Adrawarea"
+></A
+><B
+>drawarea</B
+> :: GLDrawingArea</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Awindow"
+></A
+><B
+>window</B
+> :: Window</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Acontext"
+></A
+><B
+>context</B
+> :: PangoContext</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aimagecache"
+></A
+><B
+>imagecache</B
+> :: <A HREF="Graphics-UI-Hieroglyph-Cache.html#t%3ACache"
+>Cache</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> ([<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>], TextureObject)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AGeometry"
+></A
+><B
+>Geometry</B
+> <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3ABaseVisual"
+>BaseVisual</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3ACompiledData"
+></A
+><B
+>CompiledData</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ACompiledDots"
+></A
+><B
+>CompiledDots</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avertices"
+></A
+><B
+>vertices</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ACompiledArc"
+></A
+><B
+>CompiledArc</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avertices"
+></A
+><B
+>vertices</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ACompiledPath"
+></A
+><B
+>CompiledPath</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avertices"
+></A
+><B
+>vertices</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ACompiledRectangle"
+></A
+><B
+>CompiledRectangle</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avertices"
+></A
+><B
+>vertices</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ACompiledText"
+></A
+><B
+>CompiledText</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avertices"
+></A
+><B
+>vertices</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atexture"
+></A
+><B
+>texture</B
+> :: TextureObject</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atexcoords"
+></A
+><B
+>texcoords</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ACompiledImage"
+></A
+><B
+>CompiledImage</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avertices"
+></A
+><B
+>vertices</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Achannels"
+></A
+><B
+>channels</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aww"
+></A
+><B
+>ww</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Ahh"
+></A
+><B
+>hh</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atexture"
+></A
+><B
+>texture</B
+> :: TextureObject</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atexcoords"
+></A
+><B
+>texcoords</B
+> :: [<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOptimized"
+></A
+><B
+>Optimized</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattributes"
+></A
+><B
+>attributes</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Avbo"
+></A
+><B
+>vbo</B
+> :: BufferObject</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atbo"
+></A
+><B
+>tbo</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> BufferObject</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atobj"
+></A
+><B
+>tobj</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> TextureObject</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Auid"
+></A
+><B
+>uid</B
+> :: GLuint</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Astartindex"
+></A
+><B
+>startindex</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Alen"
+></A
+><B
+>len</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AcolourToTuple"
+></A
+><B
+>colourToTuple</B
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; (<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AcolourToGL"
+></A
+><B
+>colourToGL</B
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; Color4 <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AinitializeBus"
+></A
+><B
+>initializeBus</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AWidget"
+>Widget</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Widget for initializing the bus
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AselectionBehaviour"
+></A
+><B
+>selectionBehaviour</B
+> :: <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3ABehaviour"
+>Behaviour</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>a behaviour to render hieroglyph data to the selection buffer when it sees a (Hieroglyph,Hieroglyph,PleaseSelect) event.
+   Produces (Selection,Hieroglyph,<TT
+>objectname</TT
+>) events.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderOnExpose"
+></A
+><B
+>renderOnExpose</B
+> :: <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AWidget"
+>Widget</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>make Hieroglyph render on the main window exposure
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderObj"
+></A
+><B
+>renderObj</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Make Hieroglyph send out expose events when it sees a (Hieroglyph,Hieroglyph,Rerender) event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AmouseSelectionBehaviour"
+></A
+><B
+>mouseSelectionBehaviour</B
+> :: <A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3ABehaviour"
+>Behaviour</A
+> [<A HREF="/home/jeff/.cabal/share/doc/buster-2.2/html/App-EventBus.html#t%3AEData"
+>EData</A
+> <A HREF="Graphics-Rendering-Hieroglyph-OpenGL.html#t%3AHieroglyphGLRuntime"
+>HieroglyphGLRuntime</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Select based on mouse clicks
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.3.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

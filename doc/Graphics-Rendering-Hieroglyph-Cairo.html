@@ -1,0 +1,615 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Graphics.Rendering.Hieroglyph.Cairo</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>Hieroglyph-2.23: Purely functional 2D drawing</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Graphics.Rendering.Hieroglyph.Cairo</FONT
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>Cairo backend to Hieroglyph.  Future plans include making StateModifier part
+   of the base distribution and making Frame the basis for all backends to
+   Hieroglyph.  The real challenge will be making all implementations <EM
+>look</EM
+> the
+   same.
+</P
+><P
+>Note in particular that pattern functionality and Pango layouts and font
+   rendering engines are not implemented yet.  This is both because these
+   features are fairly complicated, and because I haven't figured out yet
+   how I might make them portable to OpenGL using textures and FTGL.  if
+   someone wants to take this task on, I'd be pleased as punch.
+</P
+><DL
+><DT
+><TT
+>Author</TT
+></DT
+><DD
+> Jeff Heard
+</DD
+><DT
+><TT
+>Copyright</TT
+></DT
+><DD
+> &amp;copy; 2008 Renaissance Computing Institute
+</DD
+><DT
+><TT
+>License</TT
+></DT
+><DD
+> A LICENSE file should be included as part of this distribution
+</DD
+><DT
+><TT
+>Version</TT
+></DT
+><DD
+> 0.5
+</DD
+></DL
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AImageCache"
+>ImageCache</A
+> = <A HREF="/usr/local/share/doc/ghc/libraries/base/Control-Concurrent-MVar.html#t%3AMVar"
+>MVar</A
+> (<A HREF="Graphics-UI-Hieroglyph-Cache.html#t%3ACache"
+>Cache</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> Pixbuf)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcolourToTuple"
+>colourToTuple</A
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; (<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderPrimitive"
+>renderPrimitive</A
+> :: PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; Render <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AloadStateIntoCairo"
+>loadStateIntoCairo</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+> -&gt; Render ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderToSurfaceWithImageCache"
+>renderToSurfaceWithImageCache</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; Surface -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderToSurface"
+>renderToSurface</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; Surface -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderToPNGWithImageCache"
+>renderToPNGWithImageCache</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderToPDFWithImageCache"
+>renderToPDFWithImageCache</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderToPostscriptWithImageCache"
+>renderToPostscriptWithImageCache</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenderToSVGWithImageCache"
+>renderToSVGWithImageCache</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AloadImage"
+>loadImage</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; Render Pixbuf</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t%3AImageCache"
+></A
+><B
+>ImageCache</B
+> = <A HREF="/usr/local/share/doc/ghc/libraries/base/Control-Concurrent-MVar.html#t%3AMVar"
+>MVar</A
+> (<A HREF="Graphics-UI-Hieroglyph-Cache.html#t%3ACache"
+>Cache</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> Pixbuf)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AcolourToTuple"
+></A
+><B
+>colourToTuple</B
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; (<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>, <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderPrimitive"
+></A
+><B
+>renderPrimitive</B
+> :: PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; Render <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>renderPrimitive state prim</TT
+> draws a single primitive.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AloadStateIntoCairo"
+></A
+><B
+>loadStateIntoCairo</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+> -&gt; Render ()</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Load the Cairo state  with a RenderState Drawing.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderToSurfaceWithImageCache"
+></A
+><B
+>renderToSurfaceWithImageCache</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; Surface -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>renderFrameToSurface surface frame</TT
+> renders a frame to a particular surface
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderToSurface"
+></A
+><B
+>renderToSurface</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; Surface -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderToPNGWithImageCache"
+></A
+><B
+>renderToPNGWithImageCache</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>renderframeToPNGWithImageCache  filename xres yres frame</TT
+> renders a frame to an image file
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderToPDFWithImageCache"
+></A
+><B
+>renderToPDFWithImageCache</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>renderToPDFWithImageCache  filename width height frame</TT
+> renders a frame to a PDF file.  width and height are in points.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderToPostscriptWithImageCache"
+></A
+><B
+>renderToPostscriptWithImageCache</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>renderToPostscriptWithImageCache  filename width height frame</TT
+> renders a frame to a Postscript file.  width and height are in points.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3ArenderToSVGWithImageCache"
+></A
+><B
+>renderToSVGWithImageCache</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> t =&gt; PangoContext -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; t -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/base/System-IO.html#t%3AIO"
+>IO</A
+> ()</TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>renderToSVGWithImageCache  filename width height frame</TT
+> renders a frame to a SVG file.  width and height are in points.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3AloadImage"
+></A
+><B
+>loadImage</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Cairo.html#t%3AImageCache"
+>ImageCache</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; Render Pixbuf</TD
+></TR
+><TR
+><TD CLASS="doc"
+><TT
+>loadImage dictRef image</TT
+> pulls an image out of the cache's hat.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.3.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

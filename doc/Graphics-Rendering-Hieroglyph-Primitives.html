@@ -1,0 +1,4423 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Graphics.Rendering.Hieroglyph.Primitives</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>Hieroglyph-2.23: Purely functional 2D drawing</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Graphics.Rendering.Hieroglyph.Primitives</FONT
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This is Hieroglyph, a 2D scenegraph library similar in functionality to a barebones
+   stripped down version of Processing, but written in a purely functional manner.
+</P
+><P
+>See individual implementations (like the Graphics.Rendering.Hieroglyph.Cairo module)
+   for more information on how to use this library.
+</P
+><DL
+><DT
+><TT
+>Author</TT
+></DT
+><DD
+> Jeff Heard
+</DD
+><DT
+><TT
+>Copyright</TT
+></DT
+><DD
+> &amp;copy; 2008 Renaissance Computing Institute
+</DD
+><DT
+><TT
+>License</TT
+></DT
+><DD
+> A LICENSE file should be included as part of this distribution
+</DD
+><DT
+><TT
+>Version</TT
+></DT
+><DD
+> 0.5
+</DD
+></DL
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3APoint"
+>Point</A
+>  = <A HREF="#v%3APoint"
+>Point</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Axplus"
+>xplus</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ayplus"
+>yplus</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adist"
+>dist</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Acentroid"
+>centroid</A
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+>] -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ARect"
+>Rect</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3APlane"
+>Plane</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASingularity"
+>Singularity</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARect"
+>Rect</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Ax1"
+>x1</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Ay1"
+>y1</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Ax2"
+>x2</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Ay2"
+>y2</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALineSegment"
+>LineSegment</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ALine"
+>Line</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASpline"
+>Spline</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEndPoint"
+>EndPoint</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Als2pt"
+>ls2pt</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aoverlaps"
+>overlaps</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3APrimitive"
+>Primitive</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ADots"
+>Dots</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aat"
+>at</A
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AArc"
+>Arc</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Acenter"
+>center</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aradius"
+>radius</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aangle1"
+>angle1</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aangle2"
+>angle2</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Anegative"
+>negative</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3APath"
+>Path</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Abegin"
+>begin</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asegments"
+>segments</A
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aclosed"
+>closed</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARectangle"
+>Rectangle</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Atopleft"
+>topleft</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Awidth"
+>width</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aheight"
+>height</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AText"
+>Text</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Astr"
+>str</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Abottomleft"
+>bottomleft</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aalign"
+>align</A
+> :: LayoutAlignment</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Awrapwidth"
+>wrapwidth</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Awrapmode"
+>wrapmode</A
+> :: LayoutWrapMode</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Ajustify"
+>justify</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aindent"
+>indent</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aspacing"
+>spacing</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AUnion"
+>Union</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aprims"
+>prims</A
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AImage"
+>Image</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Afilename"
+>filename</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Adimensions"
+>dimensions</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Apreserveaspect"
+>preserveaspect</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AHidden"
+>Hidden</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aattribs"
+>attribs</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asig"
+>sig</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AAttributes"
+>Attributes</A
+>  = <A HREF="#v%3AAttributes"
+>Attributes</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aafillrule"
+>afillrule</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AafillRGBA"
+>afillRGBA</A
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aadash"
+>adash</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> ([<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>], <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>)</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AastrokeRGBA"
+>astrokeRGBA</A
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aaantialias"
+>aantialias</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAntialias"
+>Antialias</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aalinecap"
+>alinecap</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aalinejoin"
+>alinejoin</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineJoin"
+>LineJoin</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aalinewidth"
+>alinewidth</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aamiterlimit"
+>amiterlimit</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aatolerance"
+>atolerance</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aaoperator"
+>aoperator</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AOperator"
+>Operator</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aatranslatex"
+>atranslatex</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aatranslatey"
+>atranslatey</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aascalex"
+>ascalex</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aascaley"
+>ascaley</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aarotation"
+>arotation</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aafilled"
+>afilled</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aaoutlined"
+>aoutlined</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aaclipped"
+>aclipped</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Alayer"
+>layer</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Abbox"
+>bbox</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aaname"
+>aname</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Alod"
+>lod</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aupdated"
+>updated</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AAntialias"
+>Antialias</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AAntialiasDefault"
+>AntialiasDefault</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AAntialiasNone"
+>AntialiasNone</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AAntialiasGray"
+>AntialiasGray</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AAntialiasSubpixel"
+>AntialiasSubpixel</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AFillRule"
+>FillRule</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AFillRuleWinding"
+>FillRuleWinding</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AFillRuleEvenOdd"
+>FillRuleEvenOdd</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALineCap"
+>LineCap</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ALineCapButt"
+>LineCapButt</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALineCapRound"
+>LineCapRound</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALineCapSquare"
+>LineCapSquare</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALineJoin"
+>LineJoin</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ALineJoinMiter"
+>LineJoinMiter</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALineJoinRound"
+>LineJoinRound</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALineJoinBevel"
+>LineJoinBevel</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AOperator"
+>Operator</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AOperatorClear"
+>OperatorClear</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorSource"
+>OperatorSource</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorOver"
+>OperatorOver</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorIn"
+>OperatorIn</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorOut"
+>OperatorOut</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorAtop"
+>OperatorAtop</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorDest"
+>OperatorDest</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorDestOver"
+>OperatorDestOver</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorDestIn"
+>OperatorDestIn</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorDestOut"
+>OperatorDestOut</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorDestAtop"
+>OperatorDestAtop</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorXor"
+>OperatorXor</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorAdd"
+>OperatorAdd</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorSaturate"
+>OperatorSaturate</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aplain"
+>plain</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Atspan"
+>tspan</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Abold"
+>bold</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Abigger"
+>bigger</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aitalic"
+>italic</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Astrikethrough"
+>strikethrough</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asubscript"
+>subscript</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asuperscript"
+>superscript</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asmaller"
+>smaller</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Amonospace"
+>monospace</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aunderline"
+>underline</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Anguid"
+>nguid</A
+> :: () -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asign"
+>sign</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aorigin"
+>origin</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aarc"
+>arc</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Apath"
+>path</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Apolygon"
+>polygon</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Arectangle"
+>rectangle</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Astring"
+>string</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Acompound"
+>compound</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adegrees"
+>degrees</A
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ahidden"
+>hidden</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aimage"
+>image</A
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3APoint"
+></A
+><B
+>Point</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A 2D point
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3APoint"
+></A
+><B
+>Point</B
+> <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Point')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Point" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Prelude.html#t%3AFractional"
+>Fractional</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Prelude.html#t%3ANum"
+>Num</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Axplus"
+></A
+><B
+>xplus</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Translate a point horizontally
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Ayplus"
+></A
+><B
+>yplus</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Translate a point vertically
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Adist"
+></A
+><B
+>dist</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Find the distance between two points
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Acentroid"
+></A
+><B
+>centroid</B
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+>] -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Find the average of a bunch of points
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3ARect"
+></A
+><B
+>Rect</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A rectangle for dimensions
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3APlane"
+></A
+><B
+>Plane</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ASingularity"
+></A
+><B
+>Singularity</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ARect"
+></A
+><B
+>Rect</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Ax1"
+></A
+><B
+>x1</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Ay1"
+></A
+><B
+>y1</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Ax2"
+></A
+><B
+>x2</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Ay2"
+></A
+><B
+>y2</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Rect')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Rect" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3ALineSegment"
+></A
+><B
+>LineSegment</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A line segment
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALine"
+></A
+><B
+>Line</B
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ASpline"
+></A
+><B
+>Spline</B
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AEndPoint"
+></A
+><B
+>EndPoint</B
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:LineSegment')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:LineSegment" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Als2pt"
+></A
+><B
+>ls2pt</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A convenience function for getting points out of line segments in a path
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aoverlaps"
+></A
+><B
+>overlaps</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Test to see if two rectangles overlap
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3APrimitive"
+></A
+><B
+>Primitive</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A 2D primitive in an arbitrary Cartesian 2d space
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ADots"
+></A
+><B
+>Dots</B
+></TD
+><TD CLASS="rdoc"
+>A list of points that is renderable.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aat"
+></A
+><B
+>at</B
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AArc"
+></A
+><B
+>Arc</B
+></TD
+><TD CLASS="rdoc"
+>An arc
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Acenter"
+></A
+><B
+>center</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+>center of the arc
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aradius"
+></A
+><B
+>radius</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>radius of the arc
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aangle1"
+></A
+><B
+>angle1</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>begin angle
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aangle2"
+></A
+><B
+>angle2</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>end angle
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Anegative"
+></A
+><B
+>negative</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>whether or not to consider this a slice of or a slice out of the pie
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3APath"
+></A
+><B
+>Path</B
+></TD
+><TD CLASS="rdoc"
+>A cubic spline
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Abegin"
+></A
+><B
+>begin</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+>starting point
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asegments"
+></A
+><B
+>segments</B
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineSegment"
+>LineSegment</A
+>]</TD
+><TD CLASS="rdoc"
+>A sequential list of curve segments.  Note that the first two points are control points.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aclosed"
+></A
+><B
+>closed</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Whether or not to close this curve with a final line
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ARectangle"
+></A
+><B
+>Rectangle</B
+></TD
+><TD CLASS="rdoc"
+>A rectangle
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Atopleft"
+></A
+><B
+>topleft</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+>The top left point
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Awidth"
+></A
+><B
+>width</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The width
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aheight"
+></A
+><B
+>height</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The height
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AText"
+></A
+><B
+>Text</B
+></TD
+><TD CLASS="rdoc"
+>A simple text object
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Astr"
+></A
+><B
+>str</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+><TD CLASS="rdoc"
+>The string to print, in Pango markup format
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Abottomleft"
+></A
+><B
+>bottomleft</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+><TD CLASS="rdoc"
+>The anchor point for the text.  Baseline, not bottom.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aalign"
+></A
+><B
+>align</B
+> :: LayoutAlignment</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Awrapwidth"
+></A
+><B
+>wrapwidth</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Awrapmode"
+></A
+><B
+>wrapmode</B
+> :: LayoutWrapMode</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Ajustify"
+></A
+><B
+>justify</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aindent"
+></A
+><B
+>indent</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aspacing"
+></A
+><B
+>spacing</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AUnion"
+></A
+><B
+>Union</B
+></TD
+><TD CLASS="rdoc"
+>Not a primitive shape, exactly, but the union of several primitives.  No order is implied in a union, merely that the areas that intersect are
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aprims"
+></A
+><B
+>prims</B
+> :: [<A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AImage"
+></A
+><B
+>Image</B
+></TD
+><TD CLASS="rdoc"
+>A rectangular image
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Afilename"
+></A
+><B
+>filename</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>The filename of the image.  Should be something openable by Gdkpixbuf
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Adimensions"
+></A
+><B
+>dimensions</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+><TD CLASS="rdoc"
+>The dimensions of the image in current coordinates.  Either you use a point, and the image is full size, top left anchored to the point, or a rectangle
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Apreserveaspect"
+></A
+><B
+>preserveaspect</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Whether or not to scale preserving aspect ratio
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AHidden"
+></A
+><B
+>Hidden</B
+></TD
+><TD CLASS="rdoc"
+>A hidden item.  Used for state manipulation and to hide an object based on the current state
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aattribs"
+></A
+><B
+>attribs</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Asig"
+></A
+><B
+>sig</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Primitive')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Primitive" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="Graphics-Rendering-Hieroglyph-Visual.html#t%3AVisual"
+>Visual</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3AAttributes"
+></A
+><B
+>Attributes</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AAttributes"
+></A
+><B
+>Attributes</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aafillrule"
+></A
+><B
+>afillrule</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+></TD
+><TD CLASS="rdoc"
+>The pattern fill rule
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AafillRGBA"
+></A
+><B
+>afillRGBA</B
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The components of the stroke color in the range [0..1]
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aadash"
+></A
+><B
+>adash</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> ([<A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>], <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+>)</TD
+><TD CLASS="rdoc"
+>The shape of the line dashing, if any
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AastrokeRGBA"
+></A
+><B
+>astrokeRGBA</B
+> :: AlphaColour <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The components of the stroke color in the range [0..1]
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aaantialias"
+></A
+><B
+>aantialias</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAntialias"
+>Antialias</A
+></TD
+><TD CLASS="rdoc"
+>The way things are antialiased
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aalinecap"
+></A
+><B
+>alinecap</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+></TD
+><TD CLASS="rdoc"
+>The way lines are capped
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aalinejoin"
+></A
+><B
+>alinejoin</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineJoin"
+>LineJoin</A
+></TD
+><TD CLASS="rdoc"
+>The way lines are joined
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aalinewidth"
+></A
+><B
+>alinewidth</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The width of a line in points
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aamiterlimit"
+></A
+><B
+>amiterlimit</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The miter limit of lines.  See Cairo's documentation
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aatolerance"
+></A
+><B
+>atolerance</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The trapezoidal tolerance.  See Cairo's documentation
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aaoperator"
+></A
+><B
+>aoperator</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AOperator"
+>Operator</A
+></TD
+><TD CLASS="rdoc"
+>The transfer operator.  See Cairo's documentation for more <A HREF="http://cairographics.org"
+>http://cairographics.org</A
+>
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aatranslatex"
+></A
+><B
+>atranslatex</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The current translation x component
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aatranslatey"
+></A
+><B
+>atranslatey</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The current translation y component
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aascalex"
+></A
+><B
+>ascalex</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The current scale x component
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aascaley"
+></A
+><B
+>ascaley</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The current scale y component
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aarotation"
+></A
+><B
+>arotation</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>The rotation in degrees that this primitive is seen in
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aafilled"
+></A
+><B
+>afilled</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Whether or not this primitive is filled in
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aaoutlined"
+></A
+><B
+>aoutlined</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Whether or not this primitive is outlined
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aaclipped"
+></A
+><B
+>aclipped</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Whether or not this primitive is part of the clipping plane
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Alayer"
+></A
+><B
+>layer</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+>This sorts out which primitives are located on top of each other.  Do not set this yourself.  Use Graphics.Rendering.Hieroglyph.Visual.over
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Abbox"
+></A
+><B
+>bbox</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ARect"
+>Rect</A
+></TD
+><TD CLASS="rdoc"
+>The clockwise rotation in radians.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aaname"
+></A
+><B
+>aname</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>The name of the object
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Alod"
+></A
+><B
+>lod</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+>The level of detail that this primitive is at. Use Graphics.Rendering.Hieroglyph.Visual.moreSpecific
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3Aupdated"
+></A
+><B
+>updated</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Attributes')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Attributes" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3AAntialias"
+></A
+><B
+>Antialias</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>See the Cairo meanings of these.  I plan to introduce OpenGL equivalents
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AAntialiasDefault"
+></A
+><B
+>AntialiasDefault</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AAntialiasNone"
+></A
+><B
+>AntialiasNone</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AAntialiasGray"
+></A
+><B
+>AntialiasGray</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AAntialiasSubpixel"
+></A
+><B
+>AntialiasSubpixel</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Antialias')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Antialias" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAntialias"
+>Antialias</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAntialias"
+>Antialias</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAntialias"
+>Antialias</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAntialias"
+>Antialias</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3AFillRule"
+></A
+><B
+>FillRule</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>See the Cairo meanings of these.  I plan to introduce OpenGL equivalents
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AFillRuleWinding"
+></A
+><B
+>FillRuleWinding</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AFillRuleEvenOdd"
+></A
+><B
+>FillRuleEvenOdd</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:FillRule')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:FillRule" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AFillRule"
+>FillRule</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3ALineCap"
+></A
+><B
+>LineCap</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>See the Cairo meanings of these.  I plan to introduce OpenGL equivalents
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALineCapButt"
+></A
+><B
+>LineCapButt</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALineCapRound"
+></A
+><B
+>LineCapRound</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALineCapSquare"
+></A
+><B
+>LineCapSquare</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:LineCap')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:LineCap" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineCap"
+>LineCap</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3ALineJoin"
+></A
+><B
+>LineJoin</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>See the Cairo meanings of these.  I plan to introduce OpenGL equivalents
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALineJoinMiter"
+></A
+><B
+>LineJoinMiter</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALineJoinRound"
+></A
+><B
+>LineJoinRound</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3ALineJoinBevel"
+></A
+><B
+>LineJoinBevel</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:LineJoin')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:LineJoin" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineJoin"
+>LineJoin</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineJoin"
+>LineJoin</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineJoin"
+>LineJoin</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3ALineJoin"
+>LineJoin</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t%3AOperator"
+></A
+><B
+>Operator</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>See the Cairo meanings of these.  I plan to introduce OpenGL equivalents
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorClear"
+></A
+><B
+>OperatorClear</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorSource"
+></A
+><B
+>OperatorSource</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorOver"
+></A
+><B
+>OperatorOver</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorIn"
+></A
+><B
+>OperatorIn</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorOut"
+></A
+><B
+>OperatorOut</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorAtop"
+></A
+><B
+>OperatorAtop</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorDest"
+></A
+><B
+>OperatorDest</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorDestOver"
+></A
+><B
+>OperatorDestOver</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorDestIn"
+></A
+><B
+>OperatorDestIn</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorDestOut"
+></A
+><B
+>OperatorDestOut</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorDestAtop"
+></A
+><B
+>OperatorDestAtop</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorXor"
+></A
+><B
+>OperatorXor</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorAdd"
+></A
+><B
+>OperatorAdd</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v%3AOperatorSaturate"
+></A
+><B
+>OperatorSaturate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+><IMG SRC="minus.gif" CLASS="coll" ONCLICK="toggle(this,'i:Operator')" ALT="show/hide"
+> Instances</TD
+></TR
+><TR
+><TD CLASS="body"
+><DIV ID="i:Operator" STYLE="display:block;"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Eq.html#t%3AEq"
+>Eq</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AOperator"
+>Operator</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Ord.html#t%3AOrd"
+>Ord</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AOperator"
+>Operator</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Read.html#t%3ARead"
+>Read</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AOperator"
+>Operator</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="/usr/local/share/doc/ghc/libraries/base/Text-Show.html#t%3AShow"
+>Show</A
+> <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AOperator"
+>Operator</A
+></TD
+></TR
+></TABLE
+></DIV
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aplain"
+></A
+><B
+>plain</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3AAttributes"
+>Attributes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The default primitive attributes.  See source code for more details.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Atspan"
+></A
+><B
+>tspan</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/base/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango span tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Abold"
+></A
+><B
+>bold</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout bold tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Abigger"
+></A
+><B
+>bigger</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout bigger tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aitalic"
+></A
+><B
+>italic</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout italic tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Astrikethrough"
+></A
+><B
+>strikethrough</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout strikethrough tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Asubscript"
+></A
+><B
+>subscript</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout superscript tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Asuperscript"
+></A
+><B
+>superscript</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout superscript tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Asmaller"
+></A
+><B
+>smaller</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout smaller tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Amonospace"
+></A
+><B
+>monospace</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout monospace tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aunderline"
+></A
+><B
+>underline</B
+> :: <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+> -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/pretty/Text-PrettyPrint-HughesPJ.html#t%3ADoc"
+>Doc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>See pango layout underline tag
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Anguid"
+></A
+><B
+>nguid</B
+> :: () -&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Asign"
+></A
+><B
+>sign</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+> -&gt; <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aorigin"
+></A
+><B
+>origin</B
+> :: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APoint"
+>Point</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>the origin point
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aarc"
+></A
+><B
+>arc</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>A unit circle by default, modifiable with record syntax.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Apath"
+></A
+><B
+>path</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>A line starting at the origin.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Apolygon"
+></A
+><B
+>polygon</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>An arbitrary filled polygon starting at the origin.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Arectangle"
+></A
+><B
+>rectangle</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>an outlined rectangle
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Astring"
+></A
+><B
+>string</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>A rendered string starting at the origin.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Acompound"
+></A
+><B
+>compound</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>An outlined compound object
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Adegrees"
+></A
+><B
+>degrees</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/local/share/doc/ghc/libraries/ghc-prim/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>Convert degrees to radians
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Ahidden"
+></A
+><B
+>hidden</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>A hidden object.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v%3Aimage"
+></A
+><B
+>image</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Graphics-Rendering-Hieroglyph-Primitives.html#t%3APrimitive"
+>Primitive</A
+></TD
+><TD CLASS="rdoc"
+>An image.  These are efficiently cached using weak references where possible
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.3.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>
